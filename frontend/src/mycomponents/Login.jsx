@@ -1,12 +1,15 @@
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
 
@@ -40,6 +43,8 @@ const Login = () => {
             localStorage.setItem("token", response.data.token);
 
             toast.success("Login successful");
+
+            navigate("/email-generator");   
 
         } catch (error) {
 
