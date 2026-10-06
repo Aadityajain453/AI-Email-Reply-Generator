@@ -54,7 +54,7 @@ exports.generateReply = async (req, res) => {
 exports.saveReply = async (req, res) => {
     try {
 
-        const { originalEmail, generatedReply, tone } = req.body;
+        const { originalEmail, generatedReply, tone, user } = req.body;
 
         // validation
 
@@ -71,7 +71,8 @@ exports.saveReply = async (req, res) => {
         const newReply = new ReplyData({
             originalEmail,
             generatedReply,
-            tone
+            tone,
+            userId: req.user.userId
         });
 
         await newReply.save();
@@ -95,7 +96,7 @@ exports.saveReply = async (req, res) => {
 exports.getReplies = async (req, res) => {
     try {
 
-        const replies = await ReplyData.find().sort({ createdAt: -1 });
+        const replies = await ReplyData.find({ userId: req.user.userId }).sort({ createdAt: -1 });
 
         console.log(replies);
 

@@ -3,6 +3,8 @@ import axios from 'axios';
 import { toast } from "react-toastify";
 const EmailForm = ({ onReplySaved }) => {
 
+    const MAX_CHARACTERS = 2000;
+
     const [email, setEmail] = useState("");
     const [tone, setTone] = useState("Select");
     const [generatedReply, setGeneratedReply] = useState("");
@@ -90,8 +92,14 @@ const EmailForm = ({ onReplySaved }) => {
                             id="eml"
                             placeholder="Paste the email you received..."
                             value={email}
+                            maxLength={MAX_CHARACTERS}
                             onChange={(e) => setEmail(e.target.value)}
                         ></textarea>
+
+                        <div className="text-end text-muted small mt-1">
+                            {email.length} / {MAX_CHARACTERS} characters
+                        </div>
+
                     </div>
 
                     <div className="mb-3">
@@ -134,6 +142,16 @@ const EmailForm = ({ onReplySaved }) => {
                                 value={generatedReply}
                                 onChange={(e) => setGeneratedReply(e.target.value)}
                             ></textarea>
+
+
+                            <button
+                                className="btn btn-warning mt-3 me-2"
+                                onClick={handleGenerate}
+                                disabled={loading}
+                            >
+                                {loading ? "Regenerating..." : "Regenerate Reply"}
+                            </button>
+
 
                             <button
                                 className="btn btn-success mt-3"

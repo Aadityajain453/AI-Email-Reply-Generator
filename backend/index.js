@@ -9,6 +9,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 const replyRoutes = require("./routes/replyRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
@@ -27,6 +28,7 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // Routes
 app.use("/api", replyRoutes);
+app.use("/api", authRoutes);
 
 // Test Route
 app.get("/", (req, res) => {

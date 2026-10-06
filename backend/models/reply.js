@@ -17,10 +17,16 @@ const ReplySchema = new mongoose.Schema({
         required: true
     },
 
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    },
+
     createdAt: {
         type: Date,
         default: Date.now
     }
 });
 
-module.exports = mongoose.model("Reply",ReplySchema);
+module.exports = mongoose.model("Reply", ReplySchema);

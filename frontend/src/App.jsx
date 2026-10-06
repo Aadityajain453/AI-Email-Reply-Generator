@@ -1,20 +1,13 @@
 import { ToastContainer } from "react-toastify";
-import EmailForm from "./mycomponents/EmailForm";
-import SavedReplies from "./mycomponents/SavedReplies";
-import { useState } from "react";
+import Login from "./mycomponents/Login";
 
 function App() {
 
-  const [refreshReplies, setRefreshReplies] = useState(false);
   return (
     <>
-      <EmailForm
-        onReplySaved={() => setRefreshReplies(!refreshReplies)}
-      />
+      <Login />
 
-      <SavedReplies refreshReplies={refreshReplies} />
       <ToastContainer />
-
     </>
   );
 }
