@@ -1,42 +1,23 @@
-# AI Email Reply Generator
+# 🤖 AI Email Reply Generator
 
-An AI-powered web application that generates professional, casual, and friendly email replies using OpenAI.
+An AI-powered web application that generates professional email replies based on the user's original email and selected tone.
 
-Users can enter an email, select a preferred tone, generate an AI-powered reply, edit the generated response, and save it for later use.
-
-## 🚀 Live Demo
-
-Frontend:  
-https://ai-email-reply-generator-two.vercel.app/
-
-Backend:  
-https://ai-email-reply-generator-backend.onrender.com
-
-## 📂 GitHub Repository
-
-https://github.com/Aadityajain453/AI-Email-Reply-Generator
+The application allows users to enter an email, choose a preferred tone, generate an AI-powered reply, save the generated reply to MongoDB, and view previously saved replies.
 
 ---
 
-## ✨ Features
+## 🚀 Features
 
-- Enter or paste an original email
-- Select email tone:
-  - Professional
-  - Casual
-  - Friendly
-- Generate AI-powered email replies using OpenAI
-- Loading state while generating replies
-- Frontend validation and error handling
-- Generated reply can be edited before saving
-- Save generated replies to MongoDB
-- View all previously saved replies
-- Display saved date and time
-- Copy generated replies to clipboard
-- Prevent repeated save clicks after a successful save
-- Responsive Bootstrap-based interface
-- Secure OpenAI API key using environment variables
-- Deployed frontend and backend
+* ✉️ Enter an original email
+* 🎯 Select email reply tone
+* 🤖 Generate AI-powered email replies
+* 💾 Save generated replies to MongoDB
+* 📋 View all saved replies
+* 🔄 Automatically refresh saved replies after saving
+* 🛡️ Prevent duplicate saving of the same generated reply
+* 🔔 Toast notifications for success and error messages
+* ⚡ Loading state while generating replies
+* 📱 Responsive React-based UI
 
 ---
 
@@ -44,32 +25,28 @@ https://github.com/Aadityajain453/AI-Email-Reply-Generator
 
 ### Frontend
 
-- React.js
-- Vite
-- Axios
-- React Bootstrap
-- Bootstrap
-- React Toastify
+* React.js
+* Vite
+* React Bootstrap
+* Bootstrap
+* Axios
+* React Router DOM
+* React Toastify
 
 ### Backend
 
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
-- OpenAI API
-- CORS
-- dotenv
-
-### Deployment
-
-- Frontend: Vercel
-- Backend: Render
-- Database: MongoDB Atlas
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose
+* OpenAI API
+* CORS
+* dotenv
+* Nodemon
 
 ---
 
-## 📁 Project Structure
+## 📂 Project Structure
 
 ```text
 AI-Email-Reply-Generator/
@@ -79,15 +56,15 @@ AI-Email-Reply-Generator/
 │   │   └── replyController.js
 │   │
 │   ├── models/
-│   │   └── Reply.js
+│   │   └── replyModel.js
 │   │
 │   ├── routes/
 │   │   └── replyRoutes.js
 │   │
 │   ├── .env
-│   ├── .gitignore
 │   ├── index.js
-│   └── package.json
+│   ├── package.json
+│   └── package-lock.json
 │
 ├── frontend/
 │   ├── src/
@@ -98,26 +75,31 @@ AI-Email-Reply-Generator/
 │   │   ├── App.jsx
 │   │   └── main.jsx
 │   │
-│   ├── .env
-│   ├── .gitignore
 │   ├── package.json
-│   └── vite.config.js
+│   └── package-lock.json
 │
 └── README.md
 ```
 
 ---
 
-## ⚙️ Installation and Setup
+## ⚙️ Installation
 
-### 1. Clone the Repository
+Clone the repository:
 
 ```bash
 git clone https://github.com/Aadityajain453/AI-Email-Reply-Generator.git
+```
+
+Move into the project directory:
+
+```bash
 cd AI-Email-Reply-Generator
 ```
 
-### 2. Backend Setup
+---
+
+# 🔧 Backend Setup
 
 Open the backend folder:
 
@@ -125,7 +107,7 @@ Open the backend folder:
 cd backend
 ```
 
-Install the required dependencies:
+Install dependencies:
 
 ```bash
 npm install
@@ -142,225 +124,288 @@ OPENAI_API_KEY=your_openai_api_key
 Start the backend:
 
 ```bash
-node index.js
+npm start
 ```
 
-For development using Nodemon:
-
-```bash
-npx nodemon index.js
-```
-
-The backend will run on:
-
-```text
-http://localhost:5000
-```
-
-### 3. Frontend Setup
-
-Open a new terminal and go to the frontend folder:
-
-```bash
-cd frontend
-```
-
-Install the required dependencies:
-
-```bash
-npm install
-```
-
-Create a `.env` file inside the `frontend` folder:
-
-```env
-VITE_API_URL=http://localhost:5000
-```
-
-Start the frontend:
+Or, if using Nodemon:
 
 ```bash
 npm run dev
 ```
 
-The application will be available on the Vite development URL.
-
----
-
-## 🔐 Environment Variables
-
-The application uses environment variables to keep sensitive information secure.
-
-### Backend Environment Variables
-
-- `PORT` - Backend server port
-- `MONGODB_URI` - MongoDB Atlas connection string
-- `OPENAI_API_KEY` - OpenAI API key
-
-### Frontend Environment Variable
-
-- `VITE_API_URL` - Backend API base URL
-
-> Never expose the OpenAI API key in the frontend and never commit `.env` files to GitHub.
-
----
-
-## 🔌 API Endpoints
-
-The backend provides the following API endpoints:
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/generate-reply` | Generates an AI-powered email reply using OpenAI |
-| POST | `/api/save-reply` | Saves the generated reply to MongoDB |
-| GET | `/api/replies` | Fetches all saved replies from MongoDB |
-
-### Generate Reply
+Backend will run on:
 
 ```text
-POST /api/generate-reply
+http://localhost:5000
 ```
 
-Request body:
+---
+
+# 💻 Frontend Setup
+
+Open a new terminal and move to the frontend folder:
+
+```bash
+cd frontend
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the React development server:
+
+```bash
+npm run dev
+```
+
+The frontend will normally run on:
+
+```text
+http://localhost:5173
+```
+
+---
+
+# 🔐 Environment Variables
+
+The backend requires the following environment variables:
+
+| Variable         | Description                                |
+| ---------------- | ------------------------------------------ |
+| `PORT`           | Port number for the Express server         |
+| `MONGODB_URI`    | MongoDB connection string                  |
+| `OPENAI_API_KEY` | OpenAI API key used for generating replies |
+
+> ⚠️ Never upload your `.env` file or expose your API keys on GitHub.
+
+Add this to `.gitignore`:
+
+```text
+.env
+node_modules/
+```
+
+---
+
+# 🔌 API Endpoints
+
+## Generate Reply
+
+**POST**
+
+```text
+/api/generate-reply
+```
+
+### Request
 
 ```json
 {
-  "email": "Original email content",
+  "email": "Hello, I would like to reschedule our meeting.",
   "tone": "professional"
 }
 ```
 
-The backend sends the email and selected tone to the OpenAI API and returns the generated reply.
-
-### Save Reply
-
-```text
-POST /api/save-reply
-```
-
-Request body:
+### Response
 
 ```json
 {
-  "originalEmail": "Original email content",
-  "generatedReply": "Generated email reply",
+  "reply": "Hi, Thank you for reaching out..."
+}
+```
+
+---
+
+## Save Reply
+
+**POST**
+
+```text
+/api/save-reply
+```
+
+The generated reply and original email are stored in MongoDB.
+
+### Example Request
+
+```json
+{
+  "originalEmail": "Hello, I would like to reschedule our meeting.",
+  "generatedReply": "Hi, Thank you for reaching out...",
   "tone": "professional"
 }
 ```
 
-The reply is stored in MongoDB.
+---
 
-### Get Saved Replies
+## Get Saved Replies
+
+**GET**
 
 ```text
-GET /api/replies
+/api/replies
 ```
 
-This endpoint fetches all saved replies from MongoDB and returns the newest replies first.
+### Example Response
+
+```json
+{
+  "replies": [
+    {
+      "_id": "123456",
+      "originalEmail": "Hello...",
+      "generatedReply": "Hi...",
+      "tone": "professional",
+      "createdAt": "2026-10-06T10:30:00.000Z"
+    }
+  ]
+}
+```
 
 ---
 
-## 🤖 OpenAI Integration
+# 🧠 How It Works
 
-The application uses the OpenAI API to generate email replies based on the user's selected tone.
+### 1. Enter Email
 
-The frontend sends the original email and selected tone to the backend. The backend creates a prompt and sends it to the OpenAI API.
+The user enters the original email that needs a response.
 
-The generated response is then returned to the frontend and displayed in an editable textarea.
+### 2. Select Tone
 
-The OpenAI API key is stored securely in the backend `.env` file and is never exposed in the frontend.
+The user selects the desired tone for the reply, such as:
 
----
+* Professional
+* Friendly
+* Casual
+* Formal
 
-## 🗄️ MongoDB
+### 3. Generate Reply
 
-MongoDB Atlas is used to store generated email replies.
+The frontend sends the email and selected tone to the Express backend.
 
-Each saved reply contains:
+The backend sends a prompt to the OpenAI API and receives the generated response.
 
-- `originalEmail` - The original email entered by the user
-- `generatedReply` - The AI-generated reply
-- `tone` - The selected email tone
-- `createdAt` - Date and time when the reply was saved
+### 4. Display Reply
 
-Mongoose is used to define the schema and communicate with MongoDB.
+The generated reply is displayed in the frontend.
 
-Saved replies are retrieved from MongoDB with the newest replies displayed first.
+### 5. Save Reply
 
----
+The user can save the generated reply.
 
-## ✅ Validation and Error Handling
+The reply is stored in MongoDB along with:
 
-The application includes validation and error handling on both frontend and backend.
+* Original email
+* Generated reply
+* Tone
+* Creation date/time
 
-### Frontend Validation
+### 6. View Saved Replies
 
-- Email cannot be empty
-- A tone must be selected before generating a reply
-- Loading state is displayed while the AI reply is being generated
-- Save button is disabled after a successful save
-- Toast notifications are displayed for success and error messages
+Saved replies are retrieved from MongoDB and displayed in the **Saved Replies** section.
 
-### Backend Validation
-
-- Email and tone are required for generating a reply
-- Original email, generated reply, and tone are required before saving
-- Errors from OpenAI, MongoDB, and API operations are handled using `try...catch`
+The list automatically refreshes after a successful save.
 
 ---
 
-## 🚀 Deployment
+# 🗄️ Database Schema
 
-The application is deployed using the following services:
+The application uses MongoDB with Mongoose.
 
-### Frontend
+Example Reply document:
 
-The React frontend is deployed on Vercel.
-
-Production URL:
-
-https://ai-email-reply-generator-two.vercel.app/
-
-### Backend
-
-The Node.js and Express backend is deployed on Render.
-
-Production URL:
-
-https://ai-email-reply-generator-backend.onrender.com
-
-### Database
-
-MongoDB Atlas is used as the production database.
-
-The deployed backend connects to MongoDB Atlas using the `MONGODB_URI` environment variable.
+```javascript
+{
+    originalEmail: String,
+    generatedReply: String,
+    tone: String,
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
+}
+```
 
 ---
 
-## 📋 Assignment Requirements
+# 🛡️ Error Handling
 
-The project includes the following required functionality:
+The application handles common errors such as:
 
-- React frontend
-- Email input textarea
-- Tone selection
-- OpenAI API integration
-- Node.js and Express backend
-- MongoDB database integration
-- Generated reply display
-- Editable generated reply
-- Save generated reply
-- Saved replies list
-- Loading state
-- Validation and error handling
-- Secure API key using environment variables
-- Frontend and backend deployment
+* Empty email input
+* Tone not selected
+* API request failure
+* OpenAI API errors
+* MongoDB errors
+* Failed save requests
+
+Toast notifications are used to provide feedback to the user.
 
 ---
 
-## 👨‍💻 Author
+# 📸 Screenshots
+
+Add project screenshots here after completing the final UI.
+
+Example:
+
+```text
+## 📸 Screenshots
+
+### Email Generator
+
+![Email Generator](screenshots/email-generator.png)
+
+### Generated Reply
+
+![Generated Reply](screenshots/generated-reply.png)
+
+### Saved Replies
+
+![Saved Replies](screenshots/saved-replies.png)
+```
+
+---
+
+# 🔮 Future Improvements
+
+Possible future improvements include:
+
+* 🔐 User authentication
+* 👤 User-specific saved replies
+* ✏️ Edit saved replies
+* 🗑️ Delete saved replies
+* 🔍 Search saved replies
+* 📅 Better date/time formatting
+* 🎨 Improved UI/UX
+* 🌐 Frontend and backend deployment
+* 📧 Direct email sending
+* 🌍 Multiple language support
+
+---
+
+# 👨‍💻 Author
 
 **Aditya Jain**
 
-GitHub:  
-https://github.com/Aadityajain453/AI-Email-Reply-Generator
+MERN Stack Developer
+
+Skills:
+
+* MongoDB
+* Express.js
+* React.js
+* Node.js
+* REST APIs
+* CRUD Operations
+* JavaScript
+* AI API Integration
+
+---
+
+## ⭐ Project
+
+If you find this project useful, consider giving it a ⭐ on GitHub.
