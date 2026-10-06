@@ -1,5 +1,11 @@
 import { ToastContainer } from "react-toastify";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useNavigate
+} from "react-router-dom";
 
 import Login from "./mycomponents/Login";
 import EmailForm from "./mycomponents/EmailForm";
@@ -18,14 +24,33 @@ function ProtectedRoute({ children }) {
   return children;
 }
 
+
+// Logout Button Component
+function LogoutButton() {
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+
+    localStorage.removeItem("token");
+
+    navigate("/login");
+  };
+
+  return (
+    <button
+      className="btn btn-danger"
+      onClick={handleLogout}
+    >
+      Logout
+    </button>
+  );
+}
+
+
 function App() {
 
   const [refreshReplies, setRefreshReplies] = useState(false);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    window.location.href = "/login";
-  };
 
   return (
     <>
@@ -39,35 +64,39 @@ function App() {
             element={<Login />}
           />
 
+
           {/* Email Generator Page */}
           <Route
             path="/email-generator"
             element={
               <ProtectedRoute>
+
                 <>
 
                   <div className="container mt-4 text-end">
-                    <button
-                      className="btn btn-danger"
-                      onClick={handleLogout}
-                    >
-                      Logout
-                    </button>
+
+                    <LogoutButton />
+
                   </div>
-                  
+
+
                   <EmailForm
                     onReplySaved={() =>
                       setRefreshReplies(!refreshReplies)
                     }
                   />
 
+
                   <SavedReplies
                     refreshReplies={refreshReplies}
                   />
+
                 </>
+
               </ProtectedRoute>
             }
           />
+
 
           {/* Default Route */}
           <Route
@@ -79,7 +108,9 @@ function App() {
 
       </BrowserRouter>
 
+
       <ToastContainer />
+
     </>
   );
 }
