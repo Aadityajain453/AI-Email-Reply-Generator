@@ -48,11 +48,22 @@ const EmailForm = ({ onReplySaved }) => {
 
     const handleSaveReply = async () => {
         try {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/save-reply`, {
-                originalEmail: email,
-                generatedReply: generatedReply,
-                tone: tone
-            });
+
+            const token = localStorage.getItem("token");
+
+            const response = await axios.post(
+                `${import.meta.env.VITE_API_URL}/api/save-reply`,
+                {
+                    originalEmail: email,
+                    generatedReply: generatedReply,
+                    tone: tone
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
 
             console.log("Save Reply Response :", response.data);
 
@@ -61,8 +72,12 @@ const EmailForm = ({ onReplySaved }) => {
             onReplySaved();
 
         } catch (error) {
-            console.log(error);
-            toast.error("Failed to save reply")
+
+            console.log("Save Reply Error:", error);
+
+            toast.error(
+                error.response?.data?.message || "Failed to save reply"
+            );
         }
     }
 
